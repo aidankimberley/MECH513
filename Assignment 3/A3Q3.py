@@ -28,7 +28,7 @@ else:
 #Place Observer Eigenvalues
 p = [-12,-8+1j,-8-1j]
 L  = control.place(A.T,C.T,p)
-print(L)
+print("L = ", L)
 
 #%%
 #Combined dynamics
