@@ -133,11 +133,10 @@ b1 = np.block([[np.real(b)], [np.imag(b)]])
 
 # ###### Fill in here, start ######
 
-#x_test = linalg.lstsq(A,b)[0]
+
 # Solve Ax = b problem for x
 x = linalg.lstsq(A1, b1)[0]
-#print("x_test: ", x_test)
-print("x: ", x)
+
 # Extract transfer function.
 b1 = int(x[0])
 a0 = int(x[1])

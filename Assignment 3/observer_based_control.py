@@ -20,8 +20,12 @@ D = np.array([0])
 #Observer design
 p = [-12,-8+1j,-8-1j]
 L = control.place(A.T,C.T,p)
-K = np.array([-0.05, -0.03351563, -0.7375])
+print("L = ", L)
+print("|L| = ", np.linalg.norm(L))
 
+K = np.array([-0.05, -0.03351563, -0.7375])
+print("K = ", K)
+print("|K| = ", np.linalg.norm(K))
 #%%
 #Combined dynamics
 A_cl = np.block([
@@ -59,7 +63,6 @@ axes[2].grid(True)
 fig.suptitle('forced response')
 plt.tight_layout()
 plt.show()
-#%%
 #plot the error
 fig, axes = plt.subplots(3, 1, sharex=True)
 axes[0].plot(Tout_cl, error[0,:])
@@ -77,6 +80,10 @@ fig.suptitle('error')
 #New observer design
 p = [-25,-20+1j,-20-1j]
 L = control.place(A.T,C.T,p)
+print("L = ", L)
+print("|L| = ", np.linalg.norm(L))
+print("K = ", K)
+print("|K| = ", np.linalg.norm(K))
 A_cl = np.block([
     [A,           -B @ K.reshape(1, -1)],
     [L.reshape(-1,1) @ C.reshape(1,-1), A - B @ K.reshape(1, -1) - L.reshape(-1,1) @ C.reshape(1,-1)]
@@ -119,6 +126,10 @@ fig.suptitle('error')
 #New observer design
 p = [-45,-40+1j,-40-1j]
 L = control.place(A.T,C.T,p)
+print("L = ", L)
+print("|L| = ", np.linalg.norm(L))
+print("K = ", K)
+print("|K| = ", np.linalg.norm(K))
 A_cl = np.block([
     [A,           -B @ K.reshape(1, -1)],
     [L.reshape(-1,1) @ C.reshape(1,-1), A - B @ K.reshape(1, -1) - L.reshape(-1,1) @ C.reshape(1,-1)]
@@ -131,7 +142,7 @@ C_cl = np.identity(6)
 D_cl = np.zeros((6,2))
 P_cl = control.ss(A_cl, B_cl, C_cl, D_cl)
 Tout, Yout = control.forced_response(P_cl, t, u)
-error = Yout[0:3,:] - Yout[3:6,:]
+error = Yout[0:3,:] - Yout[3:6,:] #error x-x_hat
 #plot on 3x1 plot deg, deg/s, N/m and plot the error x-x_hat
 fig, axes = plt.subplots(3, 1, sharex=True)
 axes[0].plot(Tout, Yout[0,:])
@@ -147,7 +158,6 @@ axes[2].grid(True)
 fig.suptitle('forced response')
 plt.tight_layout()
 plt.show()
-# %%
 #plot the error
 fig, axes = plt.subplots(3, 1, sharex=True)
 axes[0].plot(Tout, error[0,:])

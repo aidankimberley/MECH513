@@ -73,7 +73,8 @@ P_cl3 = control.ss(A_cl3, B, C, D)
 P_cl4 = control.ss(A_cl4, B, C, D)
 
 t = np.linspace(0,10,1000)
-x0 = np.array([20/180*np.pi,15/180*np.pi,0.1])
+#x0 = np.array([20/180*np.pi,15/180*np.pi,0.1])
+x0=np.array([-1,-1,2])
 
 
 Tout, Yout_nom = control.initial_response(P_cl_nom,t,x0)
